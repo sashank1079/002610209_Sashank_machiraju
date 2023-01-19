@@ -1,6 +1,6 @@
 Tags used:  <body>, <a>, <h1>, <h2>, <br>, <div>, <input>
 		<button>, <table>, <link>, <p>
-HTML5 tags used: <header>, <footer>, <video>, <audio>, <figure>, <figcaption>
+HTML5 tags used: <header>, <footer>, <video>, <audio>, <figure>, <figcaption>, <script> (input data types)
 
 Used linear gradient background property to set the background colour 
 
@@ -22,4 +22,6 @@ Used linear gradient background property to set the background colour
 <video>: This tag is used to embed videos in a webpage.
 
 <audio>: This tag is used to embed an audio file in a webpage.
+
+Used <script> tag to incorporate input data type (date) using HTML5 tags
 
