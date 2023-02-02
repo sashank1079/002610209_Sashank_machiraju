@@ -13,7 +13,6 @@ function addNewStudent(){
   var row = table.insertRow(document.getElementById("myTable").rows.length);
   var checkbox = document.createElement("INPUT");
   checkbox.setAttribute("type", "checkbox");
-
   let td = document.createElement('td');
   td.innerHTML =  '<input type="checkbox" class="checkbox" onclick="onClickCheckBox(this);"/><br/><br/><img src="down.png" width="25px" onclick="dropDownRow(this)"/>';
   
@@ -52,18 +51,19 @@ function onClickCheckBox(index){
   document.getElementById("myTable").rows[selectedRow].style.backgroundColor="yellow";
   document.getElementById("submitButton").style.backgroundColor="orange";
   document.getElementById("submitButton").setAttribute("disabled","false");
-  document.getElementById("myTable").rows[selectedRow].cells[8].innerHTML='<td><button id="deleteButton" onclick="deleteRowDetails(this);">Delete</button><br><br><button id="editButton" onclick="editRowDetails()">Edit</button></td>';
+  document.getElementById("submitButton").style.cursor="pointer";
+  document.getElementById("myTable").rows[selectedRow].cells[8].innerHTML='<td><button id="deleteButton" onclick="deleteRowDetails(this);">Delete</button><br><button id="editButton" onclick="editRowDetails()">Edit</button></td>';
 
   }else{
     document.getElementById("myTable").rows[selectedRow].style.backgroundColor="white";
     document.getElementById("submitButton").style.backgroundColor="grey";
+    document.getElementById("submitButton").style.cursor="";
     document.getElementById("deleteButton").remove();
     document.getElementById("editButton").remove();
   }
  
 }
 
-//method to delete row
 function deleteRowDetails(index){
   var selectedRow=index.parentNode.parentNode.rowIndex; 
   document.getElementById("myTable").deleteRow(selectedRow+1);
@@ -74,13 +74,24 @@ function deleteRowDetails(index){
 }
 
 function editRowDetails(){ 
-  alert("Edit the Records!");
+  edit = prompt("Edit the Records!","");
+  
 }
+
+const boolean = "true";
 
 function dropDownRow(row) 
 {  
  var selectedRow=row.parentNode.parentNode.rowIndex; 
  document.getElementsByClassName('dropDownTextArea')[Math.floor(selectedRow/2)].style.display='block';
+ if (boolean) {
+    descRow.style.display = "table-cell";
+    boolean = false;
+  } else {          
+    descRow.style.display = "none";
+    boolean = true;
+  }
+
 }
 
 
