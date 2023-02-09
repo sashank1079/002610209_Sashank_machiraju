@@ -6,6 +6,7 @@
         var validZipCode = false;
         var validEmail = false;
         var validPhone = false;
+        var validText = false;
 
         // regular expressions for name, email and phone
         var regExZipCode = /^\d{5}(-\d{4})?$/;
@@ -20,6 +21,9 @@
         emailId.addEventListener("input", validate)
 
         var phoneNumber = document.getElementById("phoneNumber");
+        phoneNumber.addEventListener("input", validate)
+
+        var text = document.getElementById("myTextfield");
         phoneNumber.addEventListener("input", validate)
 
         
@@ -67,6 +71,16 @@
                         validPhone = true;
                     }
                     break;
+                case "text":
+                    if(text=""){
+                        this.style.border = "2px solid red";
+                        validText= false;
+                        
+                    }
+                    else{
+                        this.style.border = "";
+                        validText = true;
+                    }
             }
 
         }
@@ -98,13 +112,14 @@
                 textfield.id = "myTextfield";
                 textfield.required = true;
                 textfieldContainer.appendChild(textfield);
-                textfield.validate();
                 } else {
                 textfieldContainer.style.display = "none";
                 }
             };
             }
 
+            
+            
             document.getElementById("myForm").onsubmit = function(event) {
             event.preventDefault();
             var ele = document.querySelectorAll('input[type="radio"]');
@@ -126,19 +141,30 @@
             var how = document.getElementById("how").value;
             var comments = document.getElementById("comments").value;
 
+           
+
 
             // Create a new table row with the submitted data
 
             var table = document.getElementById("resultsTable");
 
             
-            
-            if (email === "" || phoneNumber === "" || title === "" || firstName=== "" || lastName=== "" || city ==="" || zipCode=== "" || textfield==="" || streetAddress1 ==="" || how === "" || comments === "" || state === "" || selectedOption==="") {
+            if (email === "" || phoneNumber === "" || title === "" || firstName=== "" || lastName=== "" || city ==="" || zipCode=== "" || textfield==="" || streetAddress1 ==="" || how === "" || comments === "" || state === "" || selectedOption=== "") {
             alert("All fields are required");
             }    
             else{
+                        
+                var hearbyArray = document.getElementsByName("source");
+                var hearby = ""
+                            for(i=0;i<hearbyArray.length;i++)
+                            {
+                                if(hearbyArray[i].checked)
+                                {
+                                    hearby = hearby + hearbyArray[i].getAttribute('value') +","
+                                }
+                            }
+                hearby = hearby.substring(0,hearby.length-1)
 
-            
             var newRow = table.insertRow(-1);
             newRow.insertCell(0).innerHTML = title;
             newRow.insertCell(1).innerHTML = firstName;
@@ -150,7 +176,7 @@
             newRow.insertCell(7).innerHTML = city;
             newRow.insertCell(8).innerHTML = state;
             newRow.insertCell(9).innerHTML = zipCode;
-            newRow.insertCell(10).innerHTML = how;
+            newRow.insertCell(10).innerHTML = hearby;
             newRow.insertCell(11).innerHTML = selectedOption;
             newRow.insertCell(12).innerHTML = textfield;
             newRow.insertCell(13).innerHTML = comments;
@@ -158,26 +184,7 @@
             alert("Data entered successfully!")
             
             // Clear the form fields
-            const selectedRadio = document.querySelector('input[type="radio"]:checked');
-             if (!selectedRadio) return;
-            selectedRadio.checked = false;
-            document.getElementById("phoneNumber").value = "";
-            document.getElementById("emailId").value = "";
-            document.getElementById("zipCode").value = "";
-            document.getElementById("mySelect").value = "default";
-            if (document.getElementById("myTextfield")) {
-                document.getElementById("myTextfield").value = "";
-            }
-            document.getElementById("streetAddress1").value = "";
-            document.getElementById("streetAddress2").value = "";
-            document.getElementById("zipCode").value = "";
-            document.getElementById("city").value = "";
-            document.getElementById("state").value = "";
-            document.getElementById("comments").value = "";
-            document.getElementById("firstName").value = "";
-            document.getElementById("lastName").value = "";
-            document.getElementById("title").value = "";
-            document.getElementById("mySelect").value = "default";
+            form.reset();
 
             var checkedboxes = document.querySelectorAll('input[type="checkbox"]');
             checkedboxes[0].checked=false;
@@ -185,8 +192,7 @@
             checkedboxes[2].checked=false;
             checkedboxes[3].checked=false;
 
-            document.getElementById("textfieldContainer").style.display="none";
-            document.getElementById("checkboxContainer").style.display="none";
+
             
 
             }
